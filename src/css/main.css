@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-offwhite text-navy font-sans antialiased;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-teal;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-teal to-teal-light text-white shadow-glow hover:from-teal-dark hover:to-teal hover:shadow-lg hover:-translate-y-0.5;
+  }
+  .btn-secondary {
+    @apply btn border border-navy-deep/20 bg-white/70 text-navy-deep backdrop-blur-md hover:bg-white hover:border-navy-deep/35;
+  }
+  .btn-outline {
+    @apply btn border-2 border-teal text-teal hover:bg-teal hover:text-white;
+  }
+  .btn-gold {
+    @apply btn bg-gradient-to-r from-teal-dark to-teal text-white shadow-glow-gold hover:from-teal hover:to-teal-light hover:-translate-y-0.5;
+  }
+  .section {
+    @apply py-16 md:py-24 lg:py-28;
+  }
+  .container-site {
+    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .glass {
+    @apply border border-white/20 bg-white/70 backdrop-blur-xl shadow-glass;
+  }
+  .glass-dark {
+    @apply border border-white/10 bg-navy-deep/60 backdrop-blur-xl;
+  }
+  .card-premium {
+    @apply rounded-2xl border border-gray-200 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-teal/30 hover:shadow-card-hover;
+  }
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-navy-deep/10 bg-white/60 px-4 py-2 text-sm font-medium text-navy-deep/90 backdrop-blur-sm;
+  }
+  .nav-link {
+    @apply text-sm font-medium text-navy/80 transition-colors hover:text-teal;
+  }
+  .section-title {
+    @apply text-3xl font-bold tracking-tight text-navy-deep md:text-4xl lg:text-[2.75rem];
+  }
+  .section-sub {
+    @apply mt-3 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-teal focus:px-4 focus:py-2 focus:text-white;
+  }
+}
+
+/* Sticky header — cohesive with bright lobby video (navy text always) */
+#site-header {
+  transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+#site-header.scrolled {
+  @apply border-b border-gray-200/80 bg-white/85 shadow-glass backdrop-blur-xl;
+}
+#site-header:not(.scrolled) {
+  @apply border-b border-transparent bg-white/25 backdrop-blur-md;
+}
+#site-header:not(.scrolled) .nav-link,
+#site-header:not(.scrolled) .logo-text {
+  @apply text-navy-deep;
+}
+#site-header:not(.scrolled) .nav-link:hover {
+  @apply text-teal;
+}
+#site-header:not(.scrolled) .header-cta {
+  @apply border-teal/40 bg-white/50 text-teal hover:bg-white/80;
+}
+/* Mobile menu */
+#mobile-menu {
+  @apply fixed inset-x-0 top-[4.5rem] z-40 mx-4 hidden rounded-2xl border border-gray-200 bg-white/95 p-4 shadow-glass backdrop-blur-xl;
+}
+#mobile-menu.open {
+  display: block;
+}
+
+/* Cookie banner */
+#cookie-banner {
+  @apply fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-xl rounded-2xl border border-gray-200 bg-white/95 p-5 shadow-glass backdrop-blur-xl md:left-auto md:right-6;
+}
+#cookie-banner.hidden {
+  display: none;
+}
+
+/* Hero video */
+#hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Side + bottom navy gradient; center logo wall stays relatively clear */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(16, 56, 104, 0.55) 0%,
+      rgba(16, 56, 104, 0.22) 22%,
+      transparent 42%,
+      transparent 58%,
+      rgba(16, 56, 104, 0.18) 78%,
+      rgba(16, 56, 104, 0.4) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(16, 56, 104, 0.28) 0%,
+      transparent 18%,
+      transparent 52%,
+      rgba(16, 56, 104, 0.35) 78%,
+      rgba(16, 56, 104, 0.55) 100%
+    );
+}
+
+.hero-glass {
+  @apply rounded-3xl border border-white/40 bg-white/55 p-6 shadow-glass backdrop-blur-xl md:p-8;
+  color: #1e293b;
+}
+
+@media (max-width: 767px) {
+  .hero-video-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(16, 56, 104, 0.35) 0%,
+        rgba(16, 56, 104, 0.12) 30%,
+        rgba(16, 56, 104, 0.25) 60%,
+        rgba(16, 56, 104, 0.55) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(16, 56, 104, 0.35) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(16, 56, 104, 0.25) 100%
+      );
+  }
+}
+
+/* Form styles */
+.form-input {
+  @apply w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-navy shadow-sm transition focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/20;
+}
+.form-label {
+  @apply mb-1.5 block text-sm font-semibold text-navy;
+}
+
+/* Legal pages */
+.legal-prose h2 {
+  @apply mt-8 mb-3 text-xl font-bold text-navy-deep;
+}
+.legal-prose h3 {
+  @apply mt-6 mb-2 text-lg font-semibold text-navy;
+}
+.legal-prose p,
+.legal-prose li {
+  @apply mb-3 leading-relaxed text-gray-600;
+}
+.legal-prose ul {
+  @apply mb-4 list-disc space-y-1 pl-5;
+}
+.legal-note {
+  @apply mt-8 rounded-xl border border-teal/30 bg-teal-soft/60 p-4 text-sm text-navy;
+}
